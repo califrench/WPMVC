@@ -1,14 +1,12 @@
 <?php
 
-function pre($arr){
-	echo '<pre>';
-	print_r($arr);
-	echo '</pre>';
-}
-
 function api_action($path){
 
   return get_bloginfo('url') . '/route/' .$path;
+}
+
+function sendJson($array){
+  die(json_encode($array));
 }
 
 function getController(){

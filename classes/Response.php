@@ -13,14 +13,11 @@ class Response
 	}
 
 	public static function view($template, $data=array()){
+		$path = dirname(__DIR__) . "/rest-api/v1/views/".$template.'.php';
 
-		if( file_exists( get_template_directory() . '/' . $template . '.php' ) ){
-			ob_start(); include get_template_directory() . '/' . $template . '.php'; 
-			$template = ob_get_clean(); echo $template; die;
-		} 
-		elseif( file_exists( dirname(__DIR__) . "/{VER}}/".$template.'.php' ) ) {
-			ob_start(); include dirname(__DIR__) . "/{VER}}/".$template.'.php'; 
-			$template = ob_get_clean(); echo $template; die;
+		if( file_exists( $path ) ){
+			ob_start(); include $path; 		
+			$template = ob_get_clean(); echo $template; die();
 		}
 		else {
 			die('I don\'t know what to do with myself');

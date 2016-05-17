@@ -7,11 +7,14 @@ use \WPMVC\Response as Response;
 
 class Rest_API {
 
-	public $api_prefix_url = ROUTE;
+	public $api_prefix_url;
 
-	public $current_version = VER;
+	public $current_version;
 	
 	public function __construct() {
+
+		$this->api_prefix_url = 'route';
+		$this->current_version = 'v1';
 
 		$this->apiInit();
 
@@ -23,7 +26,7 @@ class Rest_API {
 		global $wp;
 		
 		$wp->add_query_var( 'api_route' );
-		
+
 		add_rewrite_rule( '^' . $this->api_prefix_url . '/?$','index.php?api_route=/','top' );
 		
 		add_rewrite_rule( '^' . $this->api_prefix_url . '(.*)?', 'index.php?api_route=$matches[1]','top' );

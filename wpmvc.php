@@ -47,7 +47,7 @@ function update_permalinks() {
 		
 }
 
-function activate_plugin_name() {
+function activate_wpmvc_plugin() {
 
 	update_permalinks();
 
@@ -57,18 +57,18 @@ function activate_plugin_name() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
-function deactivate_plugin_name() {
+function deactivate_wpmvc_plugin() {
 
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
+register_activation_hook( __FILE__, 'activate_wpmvc_plugin' );
 
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
+register_deactivation_hook( __FILE__, 'deactivate_wpmvc_plugin' );
 
-function run_plugin_name() {
+function run_wpmvc_plugin() {
 
 	new Rest_API;
 
 }
 
-add_action( 'init', 'run_plugin_name' );
+add_action( 'init', 'run_wpmvc_plugin' );
