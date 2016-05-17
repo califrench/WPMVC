@@ -1,5 +1,7 @@
 <?php
 
+	namespace WPMVC;
+	
 	/**
 	 * Validation class
 	 * @package default
@@ -14,17 +16,18 @@
 		public static $print_errors = true;		// Toggle using self::print_errors(bool);
 		public static $print_field_title = true;	// Toggle using self::print_fields(bool);		
 		public static $default_rules = array(
-			'required' 			=> ' is a required field',
-			'max' 					=> ' must have a maximum character limit of ',
-			'min' 					=> ' must have a minimum character limit of ',
-			'exact' 				=> ' must have an exact character count of ',
-			'match' 				=> ' must be checked to continue ',
-			'alpha' 				=> ' must be alphabetical value ',
-			'numeric' 			=> ' must be a numeric value',
-			'alphanum' 			=> ' must be an alphanumeric ',
-			'nospace' 			=> ' must have no spaces', 
-			'email' 				=> ' must be a valid email address',
-			'date' 					=> ' must be a valid date format',
+			'required' 	=> ' is a required field',
+			'max' 		=> ' must have a maximum character limit of ',
+			'min' 		=> ' must have a minimum character limit of ',
+			'exact' 	=> ' must have an exact character count of ',
+			'match' 	=> ' must be checked to continue ',
+			'alpha' 	=> ' must be alphabetical value ',
+			'numeric' 	=> ' must be a numeric value',
+			'alphanum' 	=> ' must be an alphanumeric ',
+			'nospace' 	=> ' must have no spaces', 
+			'email' 	=> ' must be a valid email address',
+			'date' 		=> ' must be a valid date format',
+			'user'		=> ' is already a registered user'
 		);
 		public static $instance;
 
@@ -227,7 +230,7 @@
 				// Confirm
 				if(preg_match('/match\[(.*?)\]/i', $type, $m))
 				{
-					if(self::$data[$field_name] != self::$data[$m[1]])
+					if(self::$data[$field_name] != $m[1])
 					{
 						self::$error[$field_name][] = is_null( $error ) ? $field_name . self::$default_rules['match'] : $error;
 					}
@@ -260,7 +263,6 @@
 				// Email
 				if($type == 'email' && ! filter_var( self::$data[$field_name], FILTER_VALIDATE_EMAIL ) )
 				{
-					var_dump('fire');
 					self::$error[$field_name][] = is_null( $error ) ? $field_name . self::$default_rules['email'] : $error;
 				}
 
@@ -270,6 +272,15 @@
 					self::$error[$field_name][] = is_null( $error ) ? $field_name . self::$default_rules['date'] : $error;
 				}
 
+				if($type == 'user')
+				{
+					$Users = new \Rest_API\UserModel;
+					$Users->getUser( self::$data[$field_name] );
+
+					if( $Users->getUser( self::$data[$field_name] ) ){
+						self::$error[$field_name][] = is_null( $error ) ? $field_name . self::$default_rules['user'] : $error;
+					}
+				}
 			}
 		}
 	}

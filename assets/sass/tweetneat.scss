@@ -1,0 +1,39 @@
+textarea {
+	width: 100%;
+}
+
+.form-container {
+	position: relative;
+	overflow-x: hidden;
+
+	.form-row {
+		padding: 10px 0;
+	}
+
+	.form-control {
+
+		.control-label {
+			padding: 4px 0;
+		}
+
+		.control-field {
+			padding: 4px 0;
+		}
+	}
+
+	.form-honeypot {
+		position: absolute;
+		bottom: 0;
+		left: -999px;
+		height: 0;
+		width: 0;
+	}
+}
+.twitter-composer {
+}
+.twitter-composer {
+  background-color: rgba(85, 172, 238, 0.5);
+  border-radius: 8px;
+  padding: 11px 8px 6px 6px;
+	textarea { border: none; resize: none; }
+}

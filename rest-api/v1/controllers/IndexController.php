@@ -7,7 +7,7 @@ class IndexController extends Controller
 	
 	public function indexGET()
 	{
-		$this->response( array( 'status' => 'success', 'data' => array() ) );
+		echo $Response->view('index', array('foo'=>'bar'));
 	}
 
 }
