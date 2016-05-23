@@ -1,2 +1,2 @@
 # WPMVC
-An MVC structure for advance relational data architecture
+An MVC structure for advanced relational data architecture
